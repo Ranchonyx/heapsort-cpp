@@ -4,14 +4,17 @@
 // includes for createDummyArray(size_t size);
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
-#define NUMTYPE uint32_t
+#define Vec std::vector<int>
+#define VecRef Vec&
 
-static void print_numtype_array(NUMTYPE* arr);
-static NUMTYPE* create_dummy_array(size_t size, uint32_t max = 0xff);
-static void build_heap(NUMTYPE* elements, size_t length);
-static void xor_swap_arr(NUMTYPE * arr, size_t idxA, size_t idxB);
-static void heapify(NUMTYPE* heap, size_t length, NUMTYPE parentIdx);
-static void heap_sort(NUMTYPE* elements, size_t length);
+std::vector<int> create_dummy_array(size_t size, uint32_t max = 0xffffffff);
+
+void swap(VecRef arr, size_t idxA, size_t idxB);
+
+void heap_sort(VecRef elements);
+void build_heap(VecRef elements);
+void heapify(VecRef heap, int size, int parentIdx);
 
 #endif
