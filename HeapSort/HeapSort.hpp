@@ -11,7 +11,7 @@
 
 std::vector<int> create_dummy_array(size_t size, uint32_t max = 0xffffffff);
 
-void swap(VecRef arr, size_t idxA, size_t idxB);
+void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB);
 
 void heap_sort(VecRef elements);
 void build_heap(VecRef elements);

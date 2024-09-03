@@ -1,5 +1,7 @@
 #include <iostream>
 #include <chrono>
+#include <set>
+#include <thread>
 #include "HeapSort.hpp"
 
 void print_vector(VecRef arr) {
@@ -14,17 +16,19 @@ void print_vector(VecRef arr) {
 Vec create_dummy_array(size_t size, uint32_t max) {
     std::srand(std::time(nullptr));
 
-    Vec array_to_sort;
+    std::set<int> uniques;
 
-    for(size_t i = 0; i < size; i++) {
-        array_to_sort.push_back( std::rand() % max );
-        //std::cout << "[" << i << "] => " << array_to_sort[i] << std::endl;
+    while ((uniques.size()) != size) {
+        uniques.insert(std::rand() % max);
     }
-    return array_to_sort;
+
+    Vec uniques_vector(uniques.begin(), uniques.end());
+
+    return uniques_vector;
 }
 
 //Swap two integer numbers in a vector using XOR
-void swap(VecRef arr, size_t idxA, size_t idxB) {
+void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB) {
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
@@ -55,7 +59,9 @@ void heapify(VecRef heap, int size, int parentIdx) {
 
     //If largest is not root
     if (largestIdx != parentIdx) {
-        swap(heap, parentIdx, largestIdx);
+        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        //print_vector(heap);
+        optimized_int_swap(heap, parentIdx, largestIdx);
 
         //Recursively heapify subtree
         heapify(heap, size, largestIdx);
@@ -67,18 +73,20 @@ void heap_sort(VecRef elements) {
 
     int heap_sz = elements.size();
     for (int i = heap_sz - 1; i > 0; i--) {
-        swap(elements, 0, i);
+        optimized_int_swap(elements, 0, i);
+
         heapify(elements, i, 0);
     }
 }
 
 int main() {
 
-    int n_dummy = 1024;
-    Vec dummy = create_dummy_array(n_dummy);
-    std::cout << "Before sort" << std::endl;
+    int n_dummy = 16;
+    Vec dummy = create_dummy_array(n_dummy, 0xff);
 
+    std::cout << "Before sort" << std::endl;
     print_vector(dummy);
+    std::cout << std::endl;
 
     const auto t0 = std::chrono::high_resolution_clock::now();
     heap_sort(dummy);

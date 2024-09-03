@@ -1,0 +1,10 @@
+﻿  HeapSort.cpp
+C:\Users\f.janetzki\source\repos\HeapSort\HeapSort\HeapSort.cpp(17,25): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\Users\f.janetzki\source\repos\HeapSort\HeapSort\HeapSort.cpp(53,22): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+C:\Users\f.janetzki\source\repos\HeapSort\HeapSort\HeapSort.cpp(57,23): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  Code wird generiert.
+  18 of 197 functions ( 9.1%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Codegenerierung ist abgeschlossen.
+  HeapSort.vcxproj -> C:\Users\f.janetzki\source\repos\HeapSort\Release\HeapSort.exe
