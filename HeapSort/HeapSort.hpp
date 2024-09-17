@@ -13,16 +13,16 @@
 using namespace std;
 
 #define ArrayList vector<int>
-
+#define ulong unsigned long
 #define insert push_back
 
-vector<int> create_dummy_array(size_t size, uint64_t max = 0xffffffff);
+vector<int> CreateDummyArray(size_t size, ulong max = 0xffffffff);
 
-void optimized_int_swap(ArrayList& arr, size_t idxA, size_t idxB);
+void SwapInt(ArrayList& arr, size_t idxA, size_t idxB);
 
-void heap_sort(ArrayList& elements);
-void build_heap(ArrayList& elements);
-void heapify(ArrayList& heap, int size, int parentIdx);
+void HeapSort(ArrayList& elements);
+void BuildHeap(ArrayList& elements);
+void Heapify(ArrayList& heap, int size, int parentIdx);
 
 void print(std::string s) {
 	cout << s << endl;
@@ -36,13 +36,13 @@ void print(char* c_str) {
 	cout << endl;
 }
 
-void print_vector(ArrayList& arr) {
+void PrintArray(ArrayList& arr) {
 	printf("[");
 
 	for (size_t i = 0; i < arr.size(); i++)
 		printf("%u ", arr[i]);
 
-	printf("]\n");
+	printf("]\n\n");
 }
 
 #endif

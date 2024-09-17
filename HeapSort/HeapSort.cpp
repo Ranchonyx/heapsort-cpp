@@ -1,8 +1,7 @@
 #include "HeapSort.hpp"
 
 
-
-ArrayList create_dummy_array(size_t size, uint64_t max) {
+ArrayList CreateDummyArray(size_t size, unsigned long max) {
     // set a random seed for srand
     srand(time(nullptr));
     ArrayList dummy;
@@ -16,21 +15,21 @@ ArrayList create_dummy_array(size_t size, uint64_t max) {
 }
 
 //Swap two integer numbers in a vector using XOR
-void optimized_int_swap(ArrayList& arr, size_t idxA, size_t idxB) {
+void SwapInt(ArrayList& arr, size_t idxA, size_t idxB) {
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
 }
 
-void build_heap(ArrayList& heap) {
+void BuildHeap(ArrayList& heap) {
     int heap_sz = heap.size();
 
     for (int i = (heap_sz / 2) - 1; i >= 0; i--) {
-        heapify(heap, heap_sz, i);
+        Heapify(heap, heap_sz, i);
     }
 }
 
-void heapify(ArrayList& heap, int size, int parentIdx) {
+void Heapify(ArrayList& heap, int size, int parentIdx) {
     size_t largestIdx = parentIdx; //Largest is the (sub)tree root
     size_t leftChildIdx = static_cast<size_t>(parentIdx) * 2 + 1; //Left position is 2 * parentIdx + 1
     size_t rightChildIdx = static_cast<size_t>(parentIdx) * 2 + 2; //Right position is 2 * parentIdx + 2
@@ -45,40 +44,38 @@ void heapify(ArrayList& heap, int size, int parentIdx) {
 
     //If largest is not root
     if (largestIdx != parentIdx) {
-        optimized_int_swap(heap, parentIdx, largestIdx);
+        SwapInt(heap, parentIdx, largestIdx);
 
         //Recursively heapify subtree
-        heapify(heap, size, largestIdx);
+        Heapify(heap, size, largestIdx);
     }
 }
 
-void heap_sort(ArrayList& elements) {
-    build_heap(elements);
+void HeapSort(ArrayList& elements) {
+    BuildHeap(elements);
 
     int heap_sz = elements.size();
     for (int i = heap_sz - 1; i > 0; i--) {
-        optimized_int_swap(elements, 0, i);
+        SwapInt(elements, 0, i);
 
-        heapify(elements, i, 0);
+        Heapify(elements, i, 0);
     }
 }
 
 int main() {
-
     int dummy_len = 16;
-    ArrayList dummy = create_dummy_array(dummy_len, 0xff);
+    ArrayList dummy = CreateDummyArray(dummy_len, 0xff);
 
     print("Before sort");
-    print_vector(dummy);
-    print("");
+    PrintArray(dummy);
 
     const auto t0 = chrono::high_resolution_clock::now();
-    heap_sort(dummy);
+    HeapSort(dummy);
     const auto t1 = chrono::high_resolution_clock::now();
 
     const chrono::duration<double> dur{ t1 - t0 };
 
     print("After sort");
-    print_vector(dummy);
-    printf("\nheap_sort(arr(%i)) took %f s\n", dummy_len, dur.count());
+    PrintArray(dummy);
+    printf("heap_sort(arr(%i)) took %f s\n", dummy_len, dur.count());
 }
