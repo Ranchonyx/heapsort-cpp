@@ -5,11 +5,15 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <iostream>
+#include <chrono>
+#include <set>
+#include <thread>
 
 #define Vec std::vector<int>
 #define VecRef Vec&
 
-std::vector<int> create_dummy_array(size_t size, uint32_t max = 0xffffffff);
+std::vector<int> create_dummy_array(size_t size, uint64_t max = 0xffffffff);
 
 void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB);
 
