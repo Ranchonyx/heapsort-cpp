@@ -1,33 +1,28 @@
 #include "HeapSort.hpp"
 
-void print_vector(VecRef arr) {
-    printf("[");
 
-    for (size_t i = 0; i < arr.size(); i++)
-        printf("%u ", arr[i]);
 
-    printf("]\n");
-}
-
-Vec create_dummy_array(size_t size, uint64_t max) {
+ArrayList create_dummy_array(size_t size, uint64_t max) {
+    // set a random seed for srand
     srand(time(nullptr));
-    Vec dummy;
+    ArrayList dummy;
 
+    // fill the dummy
     for( int i = 0; i < size; i++) {
-        dummy.push_back(rand() % max);
+        dummy.insert(rand() % max);
     }
 
     return dummy;
 }
 
 //Swap two integer numbers in a vector using XOR
-void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB) {
+void optimized_int_swap(ArrayList& arr, size_t idxA, size_t idxB) {
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
 }
 
-void build_heap(VecRef heap) {
+void build_heap(ArrayList& heap) {
     int heap_sz = heap.size();
 
     for (int i = (heap_sz / 2) - 1; i >= 0; i--) {
@@ -35,7 +30,7 @@ void build_heap(VecRef heap) {
     }
 }
 
-void heapify(VecRef heap, int size, int parentIdx) {
+void heapify(ArrayList& heap, int size, int parentIdx) {
     size_t largestIdx = parentIdx; //Largest is the (sub)tree root
     size_t leftChildIdx = static_cast<size_t>(parentIdx) * 2 + 1; //Left position is 2 * parentIdx + 1
     size_t rightChildIdx = static_cast<size_t>(parentIdx) * 2 + 2; //Right position is 2 * parentIdx + 2
@@ -57,7 +52,7 @@ void heapify(VecRef heap, int size, int parentIdx) {
     }
 }
 
-void heap_sort(VecRef elements) {
+void heap_sort(ArrayList& elements) {
     build_heap(elements);
 
     int heap_sz = elements.size();
@@ -70,8 +65,8 @@ void heap_sort(VecRef elements) {
 
 int main() {
 
-    uint64_t dummy_len = 16;
-    Vec dummy = create_dummy_array(dummy_len, 0xff);
+    int dummy_len = 16;
+    ArrayList dummy = create_dummy_array(dummy_len, 0xff);
 
     print("Before sort");
     print_vector(dummy);
@@ -85,5 +80,5 @@ int main() {
 
     print("After sort");
     print_vector(dummy);
-    printf("\nheap_sort(arr(%u)) took %f s\n", dummy_len, dur.count());
+    printf("\nheap_sort(arr(%i)) took %f s\n", dummy_len, dur.count());
 }
