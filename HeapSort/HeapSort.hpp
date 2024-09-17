@@ -10,15 +10,29 @@
 #include <set>
 #include <thread>
 
-#define Vec std::vector<int>
+using namespace std;
+
+#define Vec vector<int>
 #define VecRef Vec&
 
-std::vector<int> create_dummy_array(size_t size, uint64_t max = 0xffffffff);
+vector<int> create_dummy_array(size_t size, uint64_t max = 0xffffffff);
 
 void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB);
 
 void heap_sort(VecRef elements);
 void build_heap(VecRef elements);
 void heapify(VecRef heap, int size, int parentIdx);
+
+void print(std::string s) {
+	cout << s << endl;
+}
+
+void print(char* c_str) {
+	while (*c_str)
+	{
+		cout << *c_str++;
+	}
+	cout << endl;
+}
 
 #endif

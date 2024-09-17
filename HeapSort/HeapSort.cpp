@@ -1,20 +1,20 @@
 #include "HeapSort.hpp"
 
 void print_vector(VecRef arr) {
-    std::printf("[");
+    printf("[");
 
     for (size_t i = 0; i < arr.size(); i++)
-        std::printf("%u ", arr[i]);
+        printf("%u ", arr[i]);
 
-    std::printf("]\n");
+    printf("]\n");
 }
 
 Vec create_dummy_array(size_t size, uint64_t max) {
-    std::srand(std::time(nullptr));
+    srand(time(nullptr));
     Vec dummy;
 
     for( int i = 0; i < size; i++) {
-        dummy.push_back(std::rand() % max);
+        dummy.push_back(rand() % max);
     }
 
     return dummy;
@@ -73,18 +73,17 @@ int main() {
     uint64_t dummy_len = 16;
     Vec dummy = create_dummy_array(dummy_len, 0xff);
 
-    std::cout << "Before sort" << std::endl;
+    print("Before sort");
     print_vector(dummy);
-    std::cout << std::endl;
+    print("");
 
-    const auto t0 = std::chrono::high_resolution_clock::now();
+    const auto t0 = chrono::high_resolution_clock::now();
     heap_sort(dummy);
-    const auto t1 = std::chrono::high_resolution_clock::now();
+    const auto t1 = chrono::high_resolution_clock::now();
 
-    const std::chrono::duration<double> dur{ t1 - t0 };
+    const chrono::duration<double> dur{ t1 - t0 };
 
-    std::cout << "After sort" << std::endl;
+    print("After sort");
     print_vector(dummy);
-    std::cout << std::endl;
-    std::cout << "heap_sort(arr(" << dummy_len << ")) took " << dur.count() << " s" << std::endl;
+    printf("\nheap_sort(arr(%u)) took %f s\n", dummy_len, dur.count());
 }
