@@ -1,30 +1,14 @@
-#include <iostream>
-#include <chrono>
-#include <set>
-#include <thread>
 #include "HeapSort.hpp"
 
-void print_vector(VecRef arr) {
-    std::printf("[");
-
-    for (size_t i = 0; i < arr.size(); i++)
-        std::printf("%u ", arr[i]);
-
-    std::printf("]\n");
-}
-
-Vec create_dummy_array(size_t size, uint32_t max) {
+Vec create_dummy_array(size_t size, uint64_t max) {
     std::srand(std::time(nullptr));
+    Vec dummy;
 
-    std::set<int> uniques;
-
-    while ((uniques.size()) != size) {
-        uniques.insert(std::rand() % max);
+    for( int i = 0; i < size; i++) {
+        dummy.push_back(std::rand() % max);
     }
 
-    Vec uniques_vector(uniques.begin(), uniques.end());
-
-    return uniques_vector;
+    return dummy;
 }
 
 //Swap two integer numbers in a vector using XOR
@@ -32,8 +16,6 @@ void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB) {
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
-
-    //std::cout << "Swapped arr[" << idxA << "]" << " (" << arr[idxA] << ") with arr[" << idxB << "] (" << arr[idxB] << ")" << std::endl;
 }
 
 void build_heap(VecRef heap) {
@@ -59,8 +41,6 @@ void heapify(VecRef heap, int size, int parentIdx) {
 
     //If largest is not root
     if (largestIdx != parentIdx) {
-        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        //print_vector(heap);
         optimized_int_swap(heap, parentIdx, largestIdx);
 
         //Recursively heapify subtree
@@ -81,8 +61,8 @@ void heap_sort(VecRef elements) {
 
 int main() {
 
-    int n_dummy = 16;
-    Vec dummy = create_dummy_array(n_dummy, 0xff);
+    int dummy_len = 16;
+    Vec dummy = create_dummy_array(dummy_len, 0xff);
 
     std::cout << "Before sort" << std::endl;
     print_vector(dummy);
@@ -96,5 +76,6 @@ int main() {
 
     std::cout << "After sort" << std::endl;
     print_vector(dummy);
-    std::cout << "heap_sort(arr(" << n_dummy << ")) took " << dur.count() << " s" << std::endl;
+    std::cout << std::endl;
+    std::cout << "heap_sort(arr(" << dummy_len << ")) took " << dur.count() << " s" << std::endl;
 }
