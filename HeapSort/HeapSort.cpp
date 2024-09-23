@@ -16,6 +16,7 @@ ArrayList CreateDummyArray(size_t size, unsigned long max) {
 
 //Swap two integer numbers in a vector using XOR
 void SwapInt(ArrayList& arr, size_t idxA, size_t idxB) {
+    printf("swapped index %i (%i) with index %i (%i) \n", idxA, arr[idxA], idxB, arr[idxB]);
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
