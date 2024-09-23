@@ -13,6 +13,7 @@ Vec create_dummy_array(size_t size, uint64_t max) {
 
 //Swap two integer numbers in a vector using XOR
 void optimized_int_swap(VecRef arr, size_t idxA, size_t idxB) {
+    printf("swapped index %i (%i) with index %i (%i) \n", idxA, arr[idxA], idxB, arr[idxB]);
     arr[idxA] ^= arr[idxB];
     arr[idxB] ^= arr[idxA];
     arr[idxA] ^= arr[idxB];
